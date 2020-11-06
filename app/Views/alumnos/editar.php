@@ -225,7 +225,7 @@ $data = $data["Detalles"][0];
 		    </div>
 		    <div class="form-group">
 			<label for="fechaCreacion">Fecha de creaci&oacute;n</label>
-			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= $data["fechaCreacion"]; ?>" max="<?= date("Y-m-d"); ?>" required>
+			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= $data["fechaCreacion"]; ?>" max="<?= date("Y-m-d"); ?>" readonly>
 			<div class="valid-feedback">
 			    Esto est&aacute; bien
 			</div>

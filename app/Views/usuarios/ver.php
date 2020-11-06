@@ -23,7 +23,7 @@ curl_close($curl);
 $data = json_decode($response, true);
 
 if ($data["Estado"] != 200)
-    echo "<script> alert('Hubo un error al mostrar el usuario');window.location.href='".base_url().'/usuarios/listar'."' </script>";
+    echo "<script> alert('Hubo un error al mostrar el usuario');window.location.href='".base_url().'/usuarios'."' </script>";
 
 $data = $data["Detalles"][0];
 

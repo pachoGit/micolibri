@@ -68,21 +68,37 @@ $data = $data["Detalles"][0];
 			<?php } endforeach; ?>
 		    </div>
 
-		    <div class="container row">
-			<div class="col">
-			    <?php  foreach  ($permisos as $permiso):
-			    if (!is_null($permiso["id_moduloPadre"])) {
+		    <div class="container row mb-4">
+			<?php
+			foreach  ($permisos as $modulo) {
+			    if (is_null($modulo["id_moduloPadre"])) {
+				$padre = $modulo;
+			?>
+			    <div class="col">
+				<?php 
+				foreach ($permisos as $hijo)
+				{
+				    if ($hijo["id_moduloPadre"] == $padre["idModulo"])
+				    {
+				?>	
+				    <div class="form-check">
+					<input class="form-check-input" type="checkbox" name="modulos[]" value="<?= $hijo["idModulo"];?>" id="modulosH" checked disabled >
+					<label class="form-check-label" for="modulosH">
+					    <?= $hijo["modulo"]; ?>
+					</label>
+				    </div>
+				<?php
+				}
+				}
+				?>
+			    </div>
+			    <?php
+			    }
+			    }
 			    ?>
 
-				<div class="form-check">
-				    <input class="form-check-input" type="checkbox" name="permisosH[]" value="<?= $permiso["idModulo"];?>" id="permisosH" checked disabled>
-				    <label class="form-check-label" for="permisosH">
-					<?= $permiso["modulo"]; ?>
-				    </label>
-				</div>
-			    <?php } endforeach;?>
-			</div>
 		    </div>
+
 		    <a href="<?= base_url().'/perfiles'; ?>" class="btn btn-primary mt-3"> Volver </a>
 		</form>
 

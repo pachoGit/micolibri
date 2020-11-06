@@ -42,7 +42,6 @@ if ($data["Estado"] != 200)
                     <thead class="thead-dark">
 			<tr>
 			    <th>Perfil</th>
-			    <th>Permisos</th>
 			    <th>Fecha de creación</th>
 			    <th colspan="3" class="text-center">Acciones</th>
 			</tr>
@@ -50,7 +49,6 @@ if ($data["Estado"] != 200)
                     <tfoot>
 			<tr>
 			    <th>Perfil</th>
-			    <th>Permisos</th>
 			    <th>Fecha de creación</th>
 			    <th colspan="3" class="text-center">Acciones</th>			    
 			</tr>
@@ -58,7 +56,6 @@ if ($data["Estado"] != 200)
                     <tbody>
 			<?php foreach ($data["Detalles"] as $perfil): ?>
 			<tr>
-			    <td><?= $perfil["perfil"]; ?></td>
 			    <td><?= $perfil["perfil"]; ?></td>
 			    <td><?= $perfil["fechaCreacion"]; ?></td>
 			    <td class="text-center">
