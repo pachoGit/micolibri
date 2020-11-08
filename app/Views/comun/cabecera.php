@@ -54,6 +54,7 @@
 			    <h6 class="collapse-header">Submódulos:</h6>
 			    <a class="collapse-item" href="<?= base_url().'/usuarios'; ?>">Usuarios</a>
 			    <a class="collapse-item" href="<?= base_url().'/perfiles'; ?>">Perfiles</a>
+			    <a class="collapse-item" href="<?= base_url().'/sesiones'; ?>">Sesiones</a>
 			</div>
 		    </div>
 		</li>
@@ -140,7 +141,7 @@
 			    <!-- Nav Item - User Information -->
 			    <li class="nav-item dropdown no-arrow">
 				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+				    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php session_start(); echo  $_SESSION["nombres"]; ?></span>
 				    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
 				</a>
 				<!-- Dropdown - User Information -->
