@@ -70,11 +70,27 @@
 			    <h6 class="collapse-header">Submódulos:</h6>
 			    <a class="collapse-item" href="<?= base_url().'/alumnos'; ?>">Alumnos</a>
 			    <a class="collapse-item" href="<?= base_url().'/profesores'; ?>">Profesores</a>
-			    <a class="collapse-item" href="utilities-animation.html">Grados</a>
-			    <a class="collapse-item" href="utilities-other.html">Secciones</a>
+			    <a class="collapse-item" href="#">Grados</a>
+			    <a class="collapse-item" href="#">Secciones</a>
 			</div>
 		    </div>
 		</li>
+
+
+		<li class="nav-item">
+		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#matriculas" aria-expanded="true" aria-controls="matriculas">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Matrículas</span>
+		    </a>
+		    <div id="matriculas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+			    <h6 class="collapse-header">Submódulos:</h6>
+			    <a class="collapse-item" href="<?= base_url().'/malumnos'; ?>">Alumnos</a>
+			    <a class="collapse-item" href="<?= base_url().'/mprofesores'; ?>">Profesores</a>
+			</div>
+		    </div>
+		</li>
+
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">

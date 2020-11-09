@@ -23,7 +23,7 @@ curl_close($curl);
 $data = json_decode($response, true);
 
 if ($data["Estado"] != 200)
-    echo "<script> window.alert('Hubo un error al traer los datos'); </script>"
+    echo "<script> window.alert('Hubo un error al traer los datos'); </script>";
 
 ?>
 
