@@ -1,5 +1,11 @@
 <?php
 
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $ruta = "/public/profesores/".$_FILES["rutaFoto"]["name"];
@@ -19,21 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS =>
-        "nombres=".$_POST["nombres"].
-        "&apellidos=".$_POST["apellidos"].
-        "&dni=".$_POST["dni"].
-        "&sexo=".$_POST["sexo"].
-        "&edad=".$_POST["edad"].
-        "&rutaFoto=".$ruta.
-        "&direccion=".$_POST["direccion"].
-        "&correo=".$_POST["correo"].
-        "&estudios=".$_POST["estudios"].
-        "&id_cliente=1".        
-        "&comentario=".$_POST["comentario"],
+            "nombres=".$_POST["nombres"].
+			    "&apellidos=".$_POST["apellidos"].
+			    "&dni=".$_POST["dni"].
+			    "&sexo=".$_POST["sexo"].
+			    "&edad=".$_POST["edad"].
+			    "&rutaFoto=".$ruta.
+			    "&direccion=".$_POST["direccion"].
+			    "&correo=".$_POST["correo"].
+			    "&estudios=".$_POST["estudios"].
+			    "&id_cliente=1".        
+			    "&comentario=".$_POST["comentario"],
         CURLOPT_HTTPHEADER => array(
 	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
-                                    ),
-                                   ));
+        ),
+    ));
 
     $response = curl_exec($curl);
     curl_close($curl);

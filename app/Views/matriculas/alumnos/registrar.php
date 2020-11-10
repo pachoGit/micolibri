@@ -1,5 +1,11 @@
 <?php
 
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $existeCursos = false;
@@ -184,13 +190,11 @@ $cursos = $data["Detalles"];
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Matrículas alumnos</h1>
-    <div>
-	<a class="btn btn-primary mb-2" href="<?= base_url().'/malumnos/registrar'; ?>"> Registrar </a>
-    </div>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registrar matrícula</h6>
+        </div>
         <div class="card-body">
 
 	    <div class="widget-content" >

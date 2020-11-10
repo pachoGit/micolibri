@@ -1,5 +1,11 @@
 <?php
 
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
 $curl = curl_init();
 
 curl_setopt_array($curl, array(

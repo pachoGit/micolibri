@@ -1,19 +1,25 @@
 <?php
 
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL => "http://colibri.informaticapp.com/alumnoPorCurso",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-      "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-      "Cliente:1"
-  ),
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => array(
+	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
+	"Cliente:1"
+    ),
 ));
 
 $response = curl_exec($curl);
@@ -38,14 +44,15 @@ if ($data["Estado"] != 200)
         <div class="card-body">
             <div class="table-responsive">
 
-		<table class="table table-bordered table-striped">
-		    <thead>
+		<table class="table table-bordered" id="dataTable">
+		    <thead class="thead-dark">
 			<tr>
 			    <th>Nombres</th>
 			    <th>Apellidos</th>
 			    <th>Periodo</th>                         
 			    <th>Fecha</th>
-			    <th colspan="3">Operaciones</th>
+			    <th></th>
+			    <th></th>
 			</tr>
 		    </thead>
 
@@ -67,7 +74,7 @@ if ($data["Estado"] != 200)
 				$repetidos[$alumno["idAlumno"]] = $alumno["ciclo"];
 		    ?>
 			<tbody>
-			    <tr class="odd gradeX">
+			    <tr>
 				<td><?php echo $alumno['nombres']; ?></td>
 				<td><?php echo $alumno['apellidos']; ?></td>
 				<td><?php echo $alumno['ciclo']; ?></td>

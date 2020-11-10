@@ -13,6 +13,12 @@ class Home extends BaseController
         $this->vistaSimple("principal");
     }
 
+    public function salir()
+    {
+        session_start();
+        session_destroy();
+        return redirect()->to(base_url());
+    }
 	//--------------------------------------------------------------------
 
 }

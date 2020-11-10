@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
+?>
+
 <div class="container-fluid">
     <!-- Page Heading -->
     <p> Bienvenido </p>
