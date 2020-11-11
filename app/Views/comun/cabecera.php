@@ -100,9 +100,10 @@
 		    <div id="reportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 			    <h6 class="collapse-header">Submódulos:</h6>
-			    <a class="collapse-item" href="<?= base_url().'/usuarios'; ?>">Alumnos</a>
-			    <a class="collapse-item" href="<?= base_url().'/perfiles'; ?>">Profesores</a>
-			    <a class="collapse-item" href="<?= base_url().'/sesiones'; ?>">Notas</a>
+			    <a class="collapse-item" href="<?= base_url().'/matriculas'; ?>">Matrículas</a>
+			    <a class="collapse-item" href="<?= base_url().'/ralumnos'; ?>">Alumnos</a>
+			    <a class="collapse-item" href="<?= base_url().'/rprofesores'; ?>">Profesores</a>
+			    <a class="collapse-item" href="<?= base_url().'/notas'; ?>">Notas</a>
 			</div>
 		    </div>
 		</li>

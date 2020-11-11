@@ -73,6 +73,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	    <div class="widget-content" >
 		
 		<form class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
+
+		    <div class="form-row">
+			<div class="form-group col-md-6">
+			    <label for="dni">DNI</label>
+			    <input type="text" class="form-control" onchange="traerInformacion(this)" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
+			    <div class="invalid-feedback">
+				Ingrese solo 8 n&uacute;meros
+			    </div>
+			</div>
+
+			<div class="form-group col-md-6">
+			    <label for="edad">Edad</label>
+			    <input type="number" class="form-control"  name="edad" id="edad" min="10" max="120" required>
+			    <div class="valid-feedback">
+				Esto est&aacute; bien
+			    </div>
+			    <div class="invalid-feedback">
+				Ingrese un n&uacute;mero natural mayor a 10 y menor 120
+			    </div>
+			</div>
+		    </div>
+
+
 		    <div class="form-row">
 			<div class="form-group col-md-6">
 			    <label for="nombres">Nombres</label>
@@ -146,27 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		    </div>
 
 
-		    <div class="form-row">
-			<div class="form-group col-md-4">
-			    <label for="dni">DNI</label>
-			    <input type="text" class="form-control" onchange="traerInformacion(this)" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
-			    <div class="invalid-feedback">
-				Ingrese solo 8 n&uacute;meros
-			    </div>
-			</div>
-
-			<div class="form-group col-md-4">
-			    <label for="edad">Edad</label>
-			    <input type="number" class="form-control"  name="edad" id="edad" min="10" max="120" required>
-			    <div class="valid-feedback">
-				Esto est&aacute; bien
-			    </div>
-			    <div class="invalid-feedback">
-				Ingrese un n&uacute;mero natural mayor a 10 y menor 120
-			    </div>
-			</div>
-
-		    </div>
 		    <div class="form-group">
 			<label for="fechaCreacion">Fecha de creaci&oacute;n</label>
 			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= date("Y-m-d"); ?>" max="<?= date("Y-m-d"); ?>" readonly required>

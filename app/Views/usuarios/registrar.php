@@ -84,6 +84,8 @@ $perfiles = $data["Detalles"];
 
 ?>
 
+<script src="<?= base_url().'/public/ayudas/ajax.js'; ?>"> </script>
+<script src="<?= base_url().'/public/ayudas/dni.js'; ?>"> </script>
 
 <div class="container-fluid">
 
@@ -97,10 +99,43 @@ $perfiles = $data["Detalles"];
 	    <div class="widget-content" >
 		
 		<form class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
+
+
+		    <div class="form-row">
+			<div class="form-group col-md-4">
+			    <label for="dni">DNI</label>
+			    <input type="text" onchange="traerInformacion(this)" class="form-control" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
+			    <div class="invalid-feedback">
+				Ingrese solo 8 n&uacute;meros
+			    </div>
+			</div>
+
+			<div class="form-group col-md-4">
+			    <label for="edad">Edad</label>
+			    <input type="number" class="form-control"  name="edad" id="edad" min="10" max="120" required>
+			    <div class="valid-feedback">
+				Esto est&aacute; bien
+			    </div>
+			    <div class="invalid-feedback">
+				Ingrese un n&uacute;mero natural mayor a 10 y menor 120
+			    </div>
+			</div>
+
+			<div class="form-group col-md-4">
+			    <label for="id_perfil">Seleccione un perfil</label>
+			    <select id="id_perfil" name="id_perfil" class="form-control" required>
+				<?php foreach ($perfiles as $perfil): ?>
+				    <option value="<?= $perfil["idPerfil"]; ?>"> <?= $perfil["perfil"];?> </option>
+				<?php endforeach; ?>
+			    </select>
+			</div>
+		    </div>
+
+
 		    <div class="form-row">
 			<div class="form-group col-md-6">
 			    <label for="nombres">Nombres</label>
-			    <input type="text" name="nombres" class="form-control" id="nombres" required>
+			    <input type="text" name="nombres" value="" class="form-control" id="nombres" readonly required>
 			    <div class="valid-feedback">
 				Esto est&aacute; bien
 			    </div>
@@ -110,7 +145,7 @@ $perfiles = $data["Detalles"];
 			</div>
 			<div class="form-group col-md-6">
 			    <label for="apellidos">Apellidos</label>
-			    <input type="text" name="apellidos" class="form-control" id="apellidos" required>
+			    <input type="text" name="apellidos" value="" class="form-control" id="apellidos" readonly required>
 			    <div class="valid-feedback">
 				Esto est&aacute; bien
 			    </div>
@@ -151,35 +186,6 @@ $perfiles = $data["Detalles"];
 			</div>
 		    </div>
 
-		    <div class="form-row">
-			<div class="form-group col-md-4">
-			    <label for="dni">DNI</label>
-			    <input type="text" class="form-control" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
-			    <div class="invalid-feedback">
-				Ingrese solo 8 n&uacute;meros
-			    </div>
-			</div>
-
-			<div class="form-group col-md-4">
-			    <label for="edad">Edad</label>
-			    <input type="number" class="form-control"  name="edad" id="edad" min="10" max="120" required>
-			    <div class="valid-feedback">
-				Esto est&aacute; bien
-			    </div>
-			    <div class="invalid-feedback">
-				Ingrese un n&uacute;mero natural mayor a 10 y menor 120
-			    </div>
-			</div>
-
-			<div class="form-group col-md-4">
-			    <label for="id_perfil">Seleccione un perfil</label>
-			    <select id="id_perfil" name="id_perfil" class="form-control" required>
-				<?php foreach ($perfiles as $perfil): ?>
-				    <option value="<?= $perfil["idPerfil"]; ?>"> <?= $perfil["perfil"];?> </option>
-				<?php endforeach; ?>
-			    </select>
-			</div>
-		    </div>
 		    <div class="form-group">
 			<label for="fechaCreacion">Fecha de creaci&oacute;n</label>
 			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= date("Y-m-d"); ?>" max="<?= date("Y-m-d"); ?>" required>
