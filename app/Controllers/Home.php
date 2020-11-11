@@ -19,6 +19,15 @@ class Home extends BaseController
         session_destroy();
         return redirect()->to(base_url());
     }
+
+    public function cambiar()
+    {
+        $db = \Config\Database::connect();
+        //$consulta = $db->query("ALTER TABLE AlumnoPorCurso RENAME COLUMN 'fechaCreacion' TO 'fechaCreacionM'");
+        $consulta = $db->query("SELECT * from Usuarios");
+        $resultado = $consulta->getResult();
+        echo $resultado;
+    }
 	//--------------------------------------------------------------------
 
 }

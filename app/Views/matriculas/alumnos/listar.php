@@ -78,7 +78,7 @@ if ($data["Estado"] != 200)
 				<td><?php echo $alumno['nombres']; ?></td>
 				<td><?php echo $alumno['apellidos']; ?></td>
 				<td><?php echo $alumno['ciclo']; ?></td>
-				<td><?php echo $alumno['fechaCreacion']; ?></td>
+				<td><?php echo $alumno['fechaCreacionM']; ?></td>
 				<td><a href="malumnos/ver/<?= $alumno['idAlumnoPorCurso']?>" class="btn
 					     btn-secondary">Ver</a></td>
 				<td><a onclick="return alerta();" href="malumnos/eliminar/<?= $alumno['idAlumnoPorCurso']?>"

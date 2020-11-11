@@ -57,6 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 ?>
 
+<script src="<?= base_url().'/public/ayudas/ajax.js'; ?>"> </script>
+<script src="<?= base_url().'/public/ayudas/dni.js'; ?>"> </script>
+
 
 <div class="container-fluid">
 
@@ -73,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		    <div class="form-row">
 			<div class="form-group col-md-6">
 			    <label for="nombres">Nombres</label>
-			    <input type="text" name="nombres" class="form-control" id="nombres" required>
+			    <input type="text" name="nombres" value="" class="form-control" id="nombres" readonly required>
 			    <div class="valid-feedback">
 				Esto est&aacute; bien
 			    </div>
@@ -83,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			</div>
 			<div class="form-group col-md-6">
 			    <label for="apellidos">Apellidos</label>
-			    <input type="text" name="apellidos" class="form-control" id="apellidos" required>
+			    <input type="text" name="apellidos" value="" class="form-control" id="apellidos" readonly required>
 			    <div class="valid-feedback">
 				Esto est&aacute; bien
 			    </div>
@@ -146,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		    <div class="form-row">
 			<div class="form-group col-md-4">
 			    <label for="dni">DNI</label>
-			    <input type="text" class="form-control" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
+			    <input type="text" class="form-control" onchange="traerInformacion(this)" name="dni" id="dni" required  mixlength="8" maxlength="8" pattern="[0-9]{8}">
 			    <div class="invalid-feedback">
 				Ingrese solo 8 n&uacute;meros
 			    </div>
@@ -166,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		    </div>
 		    <div class="form-group">
 			<label for="fechaCreacion">Fecha de creaci&oacute;n</label>
-			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= date("Y-m-d"); ?>" max="<?= date("Y-m-d"); ?>" required>
+			<input type="date" class="form-control" name="fechaCreacion" id="fechaCreacion" value="<?= date("Y-m-d"); ?>" max="<?= date("Y-m-d"); ?>" readonly required>
 			<div class="valid-feedback">
 			    Esto est&aacute; bien
 			</div>
