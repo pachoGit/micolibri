@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($data["Estado"] != 200)
 	echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/alumnos/registrar'."' </script>";
     else
-	echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/alumnos'."' </script>";
+	echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/alumnos/listar'."' </script>";
 }
 
 ?>
@@ -203,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			<textarea type="text" class="form-control" name="comentario"  id="comentario" > </textarea>
 		    </div>
                     <button type="submit" class="btn btn-primary"> Registrar </button>
-		    <a href="<?= base_url().'/alumnos'; ?>" class="btn btn-danger"> Cancelar </a>
+		    <a href="<?= base_url().'/alumnos/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 		
 	    </div>

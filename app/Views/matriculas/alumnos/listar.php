@@ -36,7 +36,7 @@ if ($data["Estado"] != 200)
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Matrículas alumnos</h1>
     <div>
-	<a class="btn btn-primary mb-2" href="<?= base_url().'/malumnos/registrar'; ?>"> Registrar </a>
+	<a class="btn btn-primary mb-2" href="<?= base_url().'/alumnoPorCurso/registrar'; ?>"> Registrar </a>
     </div>
 
     <!-- DataTales Example -->
@@ -49,7 +49,7 @@ if ($data["Estado"] != 200)
 			<tr>
 			    <th>Nombres</th>
 			    <th>Apellidos</th>
-			    <th>Periodo</th>                         
+			    <th>Periodo</th>
 			    <th>Fecha</th>
 			    <th></th>
 			    <th></th>
@@ -79,9 +79,9 @@ if ($data["Estado"] != 200)
 				<td><?php echo $alumno['apellidos']; ?></td>
 				<td><?php echo $alumno['ciclo']; ?></td>
 				<td><?php echo $alumno['fechaCreacionM']; ?></td>
-				<td><a href="malumnos/ver/<?= $alumno['idAlumnoPorCurso']?>" class="btn
+				<td><a href="ver/<?= $alumno['idAlumnoPorCurso']?>" class="btn
 					     btn-secondary">Ver</a></td>
-				<td><a onclick="return alerta();" href="malumnos/eliminar/<?= $alumno['idAlumnoPorCurso']?>"
+				<td><a onclick="return alerta();" href="eliminar/<?= $alumno['idAlumnoPorCurso']?>"
 				       class="btn btn-danger">Eliminar</a></td>
 			    </tr>
 			</tbody>

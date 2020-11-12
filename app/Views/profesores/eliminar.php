@@ -28,6 +28,6 @@ curl_close($curl);
 $data = json_decode($response, true);
 $mensaje = $data["Detalles"];
 
-echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/profesores';</script>";
+echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/profesores/listar';</script>";
 
 ?>

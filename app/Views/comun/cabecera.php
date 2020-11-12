@@ -1,3 +1,44 @@
+<?php
+
+session_start();
+
+// Traer hijos de un modulo padre
+function traerHijos($idpadre)
+{
+    $modulos = $_SESSION["permisos"];
+    $hijos = []; // Almacena los modulos hijos
+    foreach ($modulos as $modulo)
+    {
+	if ($modulo["id_moduloPadre"] == $idpadre)
+	    array_push($hijos, $modulo);
+    }
+    return $hijos;
+}
+
+// Filtramos los modulos padres de hijos
+
+$modulos = $_SESSION["permisos"];
+$padres = []; // Modulos Padres
+$hijos = [];  // Modulos Hijos
+
+foreach ($modulos as $modulo)
+{
+    if (is_null($modulo["id_moduloPadre"])) // Es un modulo padre
+    {
+	$h = traerHijos($modulo["idModulo"]);
+	array_push($padres, $modulo);
+	array_push($hijos, $h);
+    }
+}
+
+
+//var_dump($padres);
+//echo "Prueba<br>";
+//var_dump($hijos[0]);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,54 +84,30 @@
 		    Módulos
 		</div>
 
+		<?php
+		$iconos = ["fas fa-fw fa-cog", "fas fa-fw fa-wrench", "fas fa-money-bill-alt",
+			   "fas fa-fw fa-table"];
+		$contador = 0;
+		foreach ($padres as $padre)
+		{
+		?>
+
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item">
-		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-			<i class="fas fa-fw fa-cog"></i>
-			<span>Seguridad</span>
+		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse<?= $contador; ?>" aria-expanded="true" aria-controls="collapse<?= $contador; ?>">
+			<i class="<?= $iconos[$contador]; ?>"></i>
+			<span><?= $padre["modulo"]; ?></span>
 		    </a>
-		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+		    <div id="collapse<?= $contador; ?>" class="collapse" aria-labelledby="heading<?= $contador;?>" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 			    <h6 class="collapse-header">Submódulos:</h6>
-			    <a class="collapse-item" href="<?= base_url().'/usuarios'; ?>">Usuarios</a>
-			    <a class="collapse-item" href="<?= base_url().'/perfiles'; ?>">Perfiles</a>
-			    <a class="collapse-item" href="<?= base_url().'/sesiones'; ?>">Sesiones</a>
+			    <?php $este_hijo = $hijos[$contador]; foreach ($este_hijo as $hijo) { ?>
+				<a class="collapse-item" href="<?= base_url().'/'.$hijo["url"]; ?>"><?= $hijo["modulo"];?></a>
+			    <?php }  ?>
 			</div>
 		    </div>
 		</li>
-
-		<!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-			<i class="fas fa-fw fa-wrench"></i>
-			<span>Matenimiento</span>
-		    </a>
-		    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-			    <h6 class="collapse-header">Submódulos:</h6>
-			    <a class="collapse-item" href="<?= base_url().'/alumnos'; ?>">Alumnos</a>
-			    <a class="collapse-item" href="<?= base_url().'/profesores'; ?>">Profesores</a>
-			    <a class="collapse-item" href="#">Grados</a>
-			    <a class="collapse-item" href="#">Secciones</a>
-			</div>
-		    </div>
-		</li>
-
-
-		<li class="nav-item">
-		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#matriculas" aria-expanded="true" aria-controls="matriculas">
-			<i class="fas fa-fw fa-table"></i>
-			<span>Matrículas</span>
-		    </a>
-		    <div id="matriculas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-			    <h6 class="collapse-header">Submódulos:</h6>
-			    <a class="collapse-item" href="<?= base_url().'/malumnos'; ?>">Alumnos</a>
-			    <a class="collapse-item" href="<?= base_url().'/mprofesores'; ?>">Profesores</a>
-			</div>
-		    </div>
-		</li>
-
+		<?php $contador += 1; } ?>
 
 		<li class="nav-item">
 		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportes" aria-expanded="true" aria-controls="collapseTwo">
@@ -107,6 +124,10 @@
 			</div>
 		    </div>
 		</li>
+
+
+
+
 
 
 		<!-- Divider -->
@@ -174,7 +195,7 @@
 			    <!-- Nav Item - User Information -->
 			    <li class="nav-item dropdown no-arrow">
 				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php session_start(); echo  $_SESSION["nombres"]; ?></span>
+				    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo  $_SESSION["nombres"]; ?></span>
 				    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
 				</a>
 				<!-- Dropdown - User Information -->

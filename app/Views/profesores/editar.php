@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $data = json_decode($response, true);
     $mensaje = $data["Detalles"];
 
-    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/profesores'."' </script>";
+    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/profesores/listar'."' </script>";
     
 }
 
@@ -245,7 +245,7 @@ $data = $data["Detalles"][0];
 			<textarea type="text" class="form-control" name="comentario" id="comentario" > <?= $data["comentario"]; ?> </textarea>
 		    </div>
                     <button type="submit" class="btn btn-primary"> Aceptar </button>
-		    <a href="<?= base_url().'/profesores'; ?>" class="btn btn-danger"> Cancelar </a>
+		    <a href="<?= base_url().'/profesores/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 	    </div>
         </div>

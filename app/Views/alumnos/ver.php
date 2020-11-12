@@ -30,7 +30,7 @@ $data = json_decode($response, true);
 
 $mensaje = $data["Detalles"];
 if ($data["Estado"] != 200)
-    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/alumnos'."' </script>";
+    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/alumnos/listar'."' </script>";
 
 $data = $data["Detalles"][0];
 
@@ -177,7 +177,7 @@ $data = $data["Detalles"][0];
 			<label for="comentario">Comentario</label>
 			<textarea type="text" class="form-control" name="comentario" readonly id="comentario" > <?= $data["comentario"]; ?> </textarea>
 		    </div>
-		    <a href="<?= base_url().'/alumnos'; ?>" class="btn btn-primary"> Volver </a>
+		    <a href="<?= base_url().'/alumnos/listar'; ?>" class="btn btn-primary"> Volver </a>
 		</form>
 		
 	    </div>

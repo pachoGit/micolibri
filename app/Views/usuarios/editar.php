@@ -37,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				"&correo=".$_POST["correo"].
 				"&contra=".$_POST["contra"].
 				"&id_perfil=".$_POST["id_perfil"].
-				"&id_cliente=1".        
+				"&id_cliente=".$_SESSION["cliente"].        
 				"&comentario=".$_POST["comentario"],
             CURLOPT_HTTPHEADER => array(
-		"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
+		$_SESSION["auth"]
             ),
         ));
 
@@ -70,10 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				"&correo=".$_POST["correo"].
 				"&contra=".$_POST["contra"].
 				"&id_perfil=".$_POST["id_perfil"].
-				"&id_cliente=1".        
+				"&id_cliente=".$_SESSION["cliente"].
 				"&comentario=".$_POST["comentario"],
             CURLOPT_HTTPHEADER => array(
-		"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
+		$_SESSION["auth"]
             ),
         ));
 
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $data = json_decode($response, true);
     $mensaje = $data["Detalles"];
 
-    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/usuarios'."' </script>";
+    echo "<script> alert('".$mensaje."');window.location.href='".base_url().'/usuarios/listar'."' </script>";
     
 }
 
@@ -101,8 +101,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"], "Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -130,9 +129,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
-
+	$_SESSION["auth"], "Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -275,7 +272,7 @@ $perfiles = $perfiles["Detalles"];
 			<textarea type="text" class="form-control" name="comentario" value="<?= $data["comentario"]; ?>" id="comentario"> <?= $data["comentario"]; ?> </textarea>
 		    </div>
                     <button type="submit" class="btn btn-primary"> Aceptar </button>
-		    <a href="<?= base_url().'/usuarios'; ?>" class="btn btn-danger"> Cancelar </a>
+		    <a href="<?= base_url().'/usuarios/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 		
 	    </div>

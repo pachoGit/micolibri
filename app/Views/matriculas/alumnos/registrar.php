@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
     if ($existeCursos == false)
     {
-	echo "<script>alert('ERROR: Agregue al menos un curso');window.location.href = '".base_url()."/usuarios';</script>";
+	echo "<script>alert('ERROR: Agregue al menos un curso');window.location.href = '".base_url()."/alumnoPorCurso/registrar';</script>";
     }
 
     $data = "";
@@ -57,12 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	if ($data["Estado"] != 200)
 	{
 	    $mensaje = $data["Detalles"];
-	    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/malumnos';</script>";
+	    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
 	}
     }
     $mensaje = $data["Detalles"];
     // Redireccion despues de insertar
-    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/malumnos';</script>";
+    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
 }
 
 // Traemos los alumnos
@@ -272,7 +272,7 @@ $cursos = $data["Detalles"];
 
 		    </div>
 		    <button onclick="formarCheckboxs()"  type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="<?= base_url().'/malumnos'; ?>" class="btn btn-danger"> Cancelar </a>
+                    <a href="<?= base_url().'/alumnoPorCurso/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 	    </div>
 

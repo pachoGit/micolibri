@@ -31,7 +31,7 @@ $data = json_decode($response, true);
 if ($data["Estado"] != 200)
 {
     $mensaje = $data["Detalles"];
-    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/malumnos';</script>";
+    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
 }
 
 $data = $data["Detalles"];
@@ -101,7 +101,7 @@ function traerGrado($id)
 			    </tbody>
 			<?php endforeach; ?>
 		    </table>
-                    <a href="<?= base_url().'/malumnos'; ?>" class="btn btn-primary"> Volver </a>
+                    <a href="<?= base_url().'/alumnoPorCurso/listar'; ?>" class="btn btn-primary"> Volver </a>
 		</form>
 	    </div>
 

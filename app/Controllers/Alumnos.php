@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 
 class Alumnos extends Controller
 {
-    public function index()
+    public function listar()
     {
         $this->vistaSimple("alumnos/listar");
     }

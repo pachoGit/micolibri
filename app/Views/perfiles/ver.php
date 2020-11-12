@@ -29,7 +29,7 @@ curl_close($curl);
 $data = json_decode($response, true);
 
 if ($data["Estado"] != 200)
-    echo "<script> alert('Hubo un error al mostrar el perfil');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> alert('Hubo un error al mostrar el perfil');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 
 $permisos = $data["permisos"];
 $data = $data["Detalles"][0];
@@ -105,7 +105,7 @@ $data = $data["Detalles"][0];
 
 		    </div>
 
-		    <a href="<?= base_url().'/perfiles'; ?>" class="btn btn-primary mt-3"> Volver </a>
+		    <a href="<?= base_url().'/perfiles/listar'; ?>" class="btn btn-primary mt-3"> Volver </a>
 		</form>
 
 	    </div>

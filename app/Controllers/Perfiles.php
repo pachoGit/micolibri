@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 
 class Perfiles extends Controller
 {
-    public function index()
+    public function listar()
     {
         $this->vistaSimple("perfiles/listar");
     }

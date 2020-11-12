@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 
 class Usuarios extends Controller
 {
-    public function index()
+    public function listar()
     {
         $this->vistaSimple("usuarios/listar");
     }

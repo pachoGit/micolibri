@@ -30,7 +30,7 @@ $data = json_decode($response, true);
 
 $mensaje = $data["Detalles"];
 if ($data["Estado"] != 200)
-    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 
 $modulos = $data["Detalles"];
 
@@ -59,7 +59,7 @@ $data = json_decode($response, true);
 
 $mensaje = $data["Detalles"];
 if ($data["Estado"] != 200)
-    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 $perfil = $data["Detalles"][0];
 $permisos = $data["permisos"];
 
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     // TODO: Verificar si dejo todos los checks en blanco...!
     if (empty($_POST["modulos"]))
-	echo "<script> window.alert('Por favor seleccione algún módulo');window.location.href='".base_url().'/perfiles'."' </script>";
+	echo "<script> window.alert('Por favor seleccione algún módulo');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 
     // Actualizamos el nombre del perfil de usuario
     $curl = curl_init();
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $data = json_decode($response, true);
     $mensaje = $data["Detalles"];
     if ($data["Estado"] != 200)
-	echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles'."' </script>";
+	echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 
     // Actualizamos los permisos
     // TODO: esta implementacion solo sirve para agregar mas permisos mas no para quitarlos
@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
     }
 
-    echo "<script> window.alert('Perfil actualizado');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> window.alert('Perfil actualizado');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 }
 
 ?>
@@ -251,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		    </div>
 
                     <button type="submit" class="btn btn-primary"> Aceptar </button>
-		    <a href="<?= base_url().'/perfiles'; ?>" class="btn btn-danger"> Cancelar </a>
+		    <a href="<?= base_url().'/perfiles/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 
 	    </div>

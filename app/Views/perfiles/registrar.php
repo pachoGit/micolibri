@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 	//$data = json_decode($response, true);
     }
-    echo "<script> window.alert('Perfil de usuario creado');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> window.alert('Perfil de usuario creado');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 }
 
 
@@ -135,7 +135,7 @@ $data = json_decode($response, true);
 
 $mensaje = $data["Detalles"];
 if ($data["Estado"] != 200)
-    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles'."' </script>";
+    echo "<script> window.alert('".$mensaje."');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 
 $modulos = $data["Detalles"];
 
@@ -210,7 +210,7 @@ $modulos = $data["Detalles"];
 		    </div>
 
                     <button type="submit" class="btn btn-primary"> Registrar </button>
-		    <a href="<?= base_url().'/perfiles'; ?>" class="btn btn-danger"> Cancelar </a>
+		    <a href="<?= base_url().'/perfiles/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 
 	    </div>

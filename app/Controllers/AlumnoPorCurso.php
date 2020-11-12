@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class Malumnos extends Controller
+class AlumnoPorCurso extends Controller
 {
-    public function index()
+    public function listar()
     {
         $this->vistaSimple("matriculas/alumnos/listar");
     }

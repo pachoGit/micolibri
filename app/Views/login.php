@@ -2,8 +2,12 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $curl = curl_init();
+    session_start();
 
+    $_SESSION["auth"] = "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==";
+    $_SESSION["cliente"] = 5;
+
+    $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "http://colibri.informaticapp.com/login",
         CURLOPT_RETURNTRANSFER => true,
@@ -16,10 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_POSTFIELDS =>
             "correo=".$_POST["correo"].
 			    "&contra=".$_POST["contra"].
-			    "&id_cliente=1",
+			    "&id_cliente=".$_SESSION["cliente"],
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	    "Cliente:1",
+	    $_SESSION["auth"], "Cliente:".$_SESSION["cliente"],
             "Content-Type: application/x-www-form-urlencoded"
         ),
     ));
@@ -32,13 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($data["Estado"] != 200)
     {
 	$mensaje = $data["Detalles"];
+	session_destroy();
 	echo "<script>alert('Correo o contraseña incorrectos');window.location.href = '".base_url()."';</script>";
     }
-    //var_dump($data);die;
-    // La variable $_SESSION
+    /*
+    if (!isset($data["Detalles"][0]))
+	echo "<script>alert('Correo o contraseña incorrectos');window.location.href = '".base_url()."';</script>";
+    */
+
     $usuario = $data["Detalles"][0];
-    
-    session_start();
 
     $_SESSION["idUsuario"] = $usuario["idUsuario"];
     $_SESSION["nombres"] = $usuario["nombres"];
@@ -59,10 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS =>
             "id_usuario=".$usuario["idUsuario"].
-			    "&id_cliente=1",
+			    "&id_cliente=".$_SESSION["cliente"],
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	    "Cliente:1",
+	    $_SESSION["auth"],
             "Content-Type: application/x-www-form-urlencoded"
         ),
     ));
@@ -76,7 +80,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	echo "<script> alert('Algo ocurrió mal al registrar la sesion'); </script>";
 
     $_SESSION["idsesion"] = $data["idsesion"];
-    
+
+    // Aqui hay que traer los modulos y permisos del usuario  y guardarlo en una parte
+    // de $_SESSION
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://colibri.informaticapp.com/perfiles/".$usuario["id_perfil"],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+	    $_SESSION["auth"], "Cliente:".$_SESSION["cliente"]
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    $perfil = json_decode($response, true);
+
+    if ($data["Estado"] != 200)
+	echo "<script> alert('Algo ocurrió mal al registrar la sesion'); </script>";
+
+    $_SESSION["permisos"] = $perfil["permisos"];
+
+    //var_dump($_SESSION["permisos"]);die;
     echo "<script> window.location.href='".base_url().'/home/principal'."'; </script>";
 
 }
