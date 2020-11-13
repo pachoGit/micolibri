@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     move_uploaded_file($_FILES["rutaFoto"]["tmp_name"], $ruta2);
 
     $curl = curl_init();
-
     curl_setopt_array($curl, array(
         CURLOPT_URL => "http://colibri.informaticapp.com/profesores",
         CURLOPT_RETURNTRANSFER => true,
@@ -34,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			    "&direccion=".$_POST["direccion"].
 			    "&correo=".$_POST["correo"].
 			    "&estudios=".$_POST["estudios"].
-			    "&id_cliente=1".        
+			    "&id_cliente=".$_SESSION["cliente"].
 			    "&comentario=".$_POST["comentario"],
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
+	    $_SESSION["auth"]
         ),
     ));
 

@@ -18,8 +18,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -27,10 +27,6 @@ $response = curl_exec($curl);
 curl_close($curl);
 
 $data = json_decode($response, true);
-
-
-if ($data["Estado"] != 200)
-    echo "<script> window.alert('Hubo un error al traer los datos'); </script>"
 
 ?>
 

@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     foreach ($_POST["cursos"] as $curso)
     {
 	$curl = curl_init();
-
 	curl_setopt_array($curl, array(
             CURLOPT_URL => "http://colibri.informaticapp.com/alumnoPorCurso",
             CURLOPT_RETURNTRANSFER => true,
@@ -42,9 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				"&id_curso=".$curso.
 				"&id_seccion=".$_POST["secciones"][$cont++].
 				"&id_ciclo=".$_POST["id_ciclo"].
-				"&id_cliente=1",			    
+				"&id_cliente=".$_SESSION["cliente"],
             CURLOPT_HTTPHEADER => array(
-		"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
+		$_SESSION["cliente"],
 		"Content-Type: application/x-www-form-urlencoded"
             ),
         ));
@@ -61,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
     }
     $mensaje = $data["Detalles"];
+
     // Redireccion despues de insertar
     echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
 }
@@ -77,8 +77,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -106,8 +106,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -116,11 +116,6 @@ curl_close($curl);
 
 $data = json_decode($response, true);
 
-if ($data["Estado"] != 200)
-{
-    $mensaje = $data["Detalles"];
-    echo "<script> window.alert('".$mensaje."'); </script>";
-}
 $grados = $data["Detalles"];
 
 // Traemos los ciclos
@@ -135,8 +130,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -145,11 +140,6 @@ curl_close($curl);
 
 $data = json_decode($response, true);
 
-if ($data["Estado"] != 200)
-{
-    $mensaje = $data["Detalles"];
-    echo "<script> window.alert('".$mensaje."'); </script>";
-}
 $ciclos = $data["Detalles"];
 
 // Traemos los cursos
@@ -164,8 +154,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -174,11 +164,6 @@ curl_close($curl);
 
 $data = json_decode($response, true);
 
-if ($data["Estado"] != 200)
-{
-    $mensaje = $data["Detalles"];
-    echo "<script> window.alert('".$mensaje."'); </script>";
-}
 $cursos = $data["Detalles"];
 
 

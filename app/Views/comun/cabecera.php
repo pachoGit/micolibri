@@ -31,11 +31,6 @@ foreach ($modulos as $modulo)
     }
 }
 
-
-//var_dump($padres);
-//echo "Prueba<br>";
-//var_dump($hijos[0]);
-
 ?>
 
 
@@ -203,7 +198,7 @@ foreach ($modulos as $modulo)
 				    <div class="dropdown-divider"></div>
 				    <a class="dropdown-item" href="<?= base_url().'/home/salir'; ?>" data-toggle="modal" data-target="#logoutModal">
 					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-					Logout
+					Salir
 				    </a>
 				</div>
 			    </li>

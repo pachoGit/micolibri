@@ -18,8 +18,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -47,8 +47,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 
@@ -83,9 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_CUSTOMREQUEST => "PUT",
         CURLOPT_POSTFIELDS =>
             "perfil=".$_POST["perfil"].
-			    "&id_cliente=1",
+			    "&id_cliente=".$_SESSION["cliente"],
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
+	    $_SESSION["auth"]
         ),
     ));
     $response = curl_exec($curl);
@@ -129,9 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		CURLOPT_POSTFIELDS =>
 		    "id_perfil=".$_POST["idPerfil"].
 				    "&id_modulo=".$id_modulo.
-				    "&id_cliente=1",
+				    "&id_cliente=".$_SESSION["cliente"],
 		CURLOPT_HTTPHEADER => array(
-		    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ=="
+		    $_SESSION["auth"]
 		),
 	    ));
 
@@ -139,7 +139,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	    curl_close($curl);
 	}
     }
-
     echo "<script> window.alert('Perfil actualizado');window.location.href='".base_url().'/perfiles/listar'."' </script>";
 }
 

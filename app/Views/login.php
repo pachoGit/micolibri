@@ -31,17 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     curl_close($curl);
 
     $data = json_decode($response, true);
-
     if ($data["Estado"] != 200)
     {
 	$mensaje = $data["Detalles"];
 	session_destroy();
 	echo "<script>alert('Correo o contraseña incorrectos');window.location.href = '".base_url()."';</script>";
+	return;
     }
-    /*
-    if (!isset($data["Detalles"][0]))
-	echo "<script>alert('Correo o contraseña incorrectos');window.location.href = '".base_url()."';</script>";
-    */
 
     $usuario = $data["Detalles"][0];
 
@@ -73,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $response = curl_exec($curl);
     curl_close($curl);
-
+    
     $data = json_decode($response, true);
 
     if ($data["Estado"] != 200)
@@ -103,7 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     curl_close($curl);
 
     $perfil = json_decode($response, true);
-
     if ($data["Estado"] != 200)
 	echo "<script> alert('Algo ocurrió mal al registrar la sesion'); </script>";
 
@@ -111,7 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     //var_dump($_SESSION["permisos"]);die;
     echo "<script> window.location.href='".base_url().'/home/principal'."'; </script>";
-
 }
 
 ?>

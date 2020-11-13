@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS =>
             "perfil=".$_POST["perfil"].
-			    "&id_cliente=1",
+			    "&id_cliente=".$_SESSION["cliente"],
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
+	    $_SESSION["auth"]
         ),
     ));
 
@@ -53,8 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
-	    "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	    "Cliente:1"
+	    $_SESSION["auth"], "Cliente:".$_SESSION["cliente"]
         ),
     ));
 
@@ -97,9 +96,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             CURLOPT_POSTFIELDS =>
 		"id_modulo=".$modulo.
 				"&id_perfil=".$id_perfil.
-				"&id_cliente=1",
+				"&id_cliente=".$_SESSION["cliente"],
             CURLOPT_HTTPHEADER => array(
-		"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
+		$_SESSION["auth"]
             ),
         ));
 
@@ -123,8 +122,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-	"Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==",
-	"Cliente:1"
+	$_SESSION["auth"],
+	"Cliente:".$_SESSION["cliente"]
     ),
 ));
 

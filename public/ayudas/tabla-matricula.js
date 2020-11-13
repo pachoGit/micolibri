@@ -63,7 +63,7 @@ function guardarDatosFila()
     objSeccion = document.getElementById("id_seccion");
     id_seccion = objSeccion.options[objSeccion.selectedIndex].value;
     
-    if (id_curso === "" && id_grado === "" && id_seccion === "")
+    if (id_curso === "" || id_grado === "" || id_seccion === "")
 	return -1;
 
     let nuevo = new Info(id_curso, id_grado, id_seccion);
