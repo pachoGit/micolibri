@@ -1,6 +1,6 @@
 // Funcion ajax
 // ejemplo ruta = "http://colibri.informaticapp.com/grados/traerGrado"
-function ajax(id, ruta, funcion)
+function ajax(id, cliente, ruta, funcion)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
@@ -10,7 +10,7 @@ function ajax(id, ruta, funcion)
     }
     xhttp.open("POST", ruta, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id=" + id + "&id_cliente=1");
+    xhttp.send("id=" + id + "&id_cliente=" + cliente);
 }
 
 function ajax_get(ruta, funcion)

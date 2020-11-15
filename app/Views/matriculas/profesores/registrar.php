@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
     if ($existeCursos == false)
     {
-	echo "<script>alert('ERROR: Agregue al menos un curso');window.location.href = '".base_url()."/alumnoPorCurso/registrar';</script>";
+	echo "<script>alert('ERROR: Agregue al menos un curso');window.location.href = '".base_url()."/curSecPorProfesor/registrar';</script>";
     }
 
     $data = "";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://colibri.informaticapp.com/alumnoPorCurso",
+            CURLOPT_URL => "http://colibri.informaticapp.com/curSecPorProfesor",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS =>
-		"id_alumno=".$_POST["id_alumno"].
+		"id_profesor=".$_POST["id_profesor"].
 				"&id_curso=".$curso.
 				"&id_seccion=".$_POST["secciones"][$cont++].
 				"&id_ciclo=".$_POST["id_ciclo"].
@@ -56,19 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	if ($data["Estado"] != 200)
 	{
 	    $mensaje = $data["Detalles"];
-	    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
+	    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/curSecPorProfesor/listar';</script>";
 	}
     }
     $mensaje = $data["Detalles"];
 
     // Redireccion despues de insertar
-    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/alumnoPorCurso/listar';</script>";
+    echo "<script>alert('".$mensaje."');window.location.href = '".base_url()."/curSecPorProfesor/listar';</script>";
 }
 
-// Traemos los alumnos
+// Traemos los profesores
 $curl = curl_init();
 curl_setopt_array($curl, array(
-    CURLOPT_URL => "http://colibri.informaticapp.com/alumnos",
+    CURLOPT_URL => "http://colibri.informaticapp.com/profesores",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
@@ -92,7 +92,7 @@ if ($data["Estado"] != 200)
     $mensaje = $data["Detalles"];
     echo "<script> window.alert('".$mensaje."'); </script>";
 }
-$alumnos = $data["Detalles"];
+$profesores = $data["Detalles"];
 
 // Traemos los grados
 $curl = curl_init();
@@ -185,10 +185,10 @@ $cursos = $data["Detalles"];
 	    <div class="widget-content" >
 		<form  method="post" class="needs-validation" novalidate>
 		    <div class="form-group">
-			<label for="id_alumno">Seleccione a un alumno</label>
-			<select id="id_alumno" name="id_alumno" class="form-control" required>
-			    <?php foreach ($alumnos as $alumno):?>
-				<option value="<?= $alumno["idAlumno"]?>"> <?= $alumno["nombres"]." ".$alumno["apellidos"]; ?></option>
+			<label for="id_profesor">Seleccione a un profesor</label>
+			<select id="id_profesor" name="id_profesor" class="form-control" required>
+			    <?php foreach ($profesores as $profesor):?>
+				<option value="<?= $profesor["idProfesor"]?>"> <?= $profesor["nombres"]." ".$profesor["apellidos"]; ?></option>
 			    <?php endforeach; ?> 
 			</select>
 		    </div>
@@ -222,7 +222,7 @@ $cursos = $data["Detalles"];
 
 		    <div class="form-row">
 			<div class="form-group col-md-9">
-			    <label for="monto">Seleccione los cursos que llevar&aacute; el alumno</label>
+			    <label for="monto">Seleccione el curso que enseñará el profesor</label>
 			    <select id="id_curso" name="id_curso" class="form-control" required>
 				<?php foreach ($cursos as $curso): ?>
 				    <option value="<?= $curso["idCurso"]?>"> <?= $curso["curso"]; ?></option>
@@ -257,7 +257,7 @@ $cursos = $data["Detalles"];
 
 		    </div>
 		    <button onclick="formarCheckboxs()"  type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="<?= base_url().'/alumnoPorCurso/listar'; ?>" class="btn btn-danger"> Cancelar </a>
+                    <a href="<?= base_url().'/curSecPorProfesor/listar'; ?>" class="btn btn-danger"> Cancelar </a>
 		</form>
 	    </div>
 

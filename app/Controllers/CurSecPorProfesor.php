@@ -4,27 +4,27 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class AlumnoPorCurso extends Controller
+class CurSecPorProfesor extends Controller
 {
     public function listar()
     {
-        $this->vistaSimple("matriculas/alumnos/listar");
+        $this->vistaSimple("matriculas/profesores/listar");
     }
 
     public function registrar()
     {
-        $this->vistaSimple("matriculas/alumnos/registrar");
+        $this->vistaSimple("matriculas/profesores/registrar");
     }
 
     public function ver($id)
     {
         $data = ["id" => $id];
-        $this->vistas("matriculas/alumnos/ver", $data);
+        $this->vistas("matriculas/profesores/ver", $data);
     }
     
     public function eliminar($id)
     {
         $data = ["id" => $id];
-        echo view("matriculas/alumnos/eliminar", $data);
+        echo view("matriculas/profesores/eliminar", $data);
     }
 }

@@ -8,7 +8,7 @@ if (!isset($_SESSION["nombres"]))
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-    CURLOPT_URL => "http://colibri.informaticapp.com/alumnoPorCurso",
+    CURLOPT_URL => "http://colibri.informaticapp.com/curSecPorProfesor",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
@@ -31,9 +31,9 @@ $data = json_decode($response, true);
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Matrículas alumnos</h1>
+    <h1 class="h3 mb-2 text-gray-800">Matrículas profesores</h1>
     <div>
-	<a class="btn btn-primary mb-2" href="<?= base_url().'/alumnoPorCurso/registrar'; ?>"> Registrar </a>
+	<a class="btn btn-primary mb-2" href="<?= base_url().'/curSecPorProfesor/registrar'; ?>"> Registrar </a>
     </div>
 
     <!-- DataTales Example -->
@@ -55,11 +55,11 @@ $data = json_decode($response, true);
 
 		    <?php
 		    if ($data["Estado"] == 200) {
-			$repetidos = []; foreach($data["Detalles"] as $alumno) {
+			$repetidos = []; foreach($data["Detalles"] as $profesor) {
 			    $existe = false;
 			    foreach ($repetidos as $clave => $valor)
 			    {
-				if ($clave == $alumno["idAlumno"] and $valor == $alumno["ciclo"])
+				if ($clave == $profesor["idProfesor"] and $valor == $profesor["ciclo"])
 				{
 				    $existe = true;
 				    break;
@@ -68,16 +68,16 @@ $data = json_decode($response, true);
 			    }
 			    if ($existe == false)
 			    {
-				$repetidos[$alumno["idAlumno"]] = $alumno["ciclo"];
+				$repetidos[$profesor["idProfesor"]] = $profesor["ciclo"];
 		    ?>
 			<tbody>
 			    <tr>
-				<td><?php echo $alumno['nombres']; ?></td>
-				<td><?php echo $alumno['apellidos']; ?></td>
-				<td><?php echo $alumno['ciclo']; ?></td>
-				<td><?php echo $alumno['fechaCreacionM']; ?></td>
+				<td><?php echo $profesor['nombres']; ?></td>
+				<td><?php echo $profesor['apellidos']; ?></td>
+				<td><?php echo $profesor['ciclo']; ?></td>
+				<td><?php echo $profesor['fechaCreacion']; ?></td>
 				<td class="text-center">
-				    <a href="<?= base_url().'/alumnoPorCurso/ver/'.$alumno["idAlumnoPorCurso"]; ?>" class="btn btn-info btn-icon-split">
+				    <a href="<?= base_url().'/curSecPorProfesor/ver/'.$profesor["idCurSecPorProfesor"]; ?>" class="btn btn-info btn-icon-split">
 					<span class="icon text-white-50">
 					    <i class="fas fa-info-circle"></i>
 					</span>
@@ -85,7 +85,7 @@ $data = json_decode($response, true);
 				    </a>
 				</td>
 				<td class="text-center">
-				    <a onclick="return alerta()" href="<?= base_url().'/alumnoPorCurso/eliminar/'.$alumno["idAlumno"]; ?>" class="btn btn-danger btn-icon-split">
+				    <a onclick="return alerta()" href="<?= base_url().'/curSecPorProfesor/eliminar/'.$profesor["idCurSecPorProfesor"]; ?>" class="btn btn-danger btn-icon-split">
 					<span class="icon text-white-50">
 					    <i class="fas fa-trash"></i>
 					</span>

@@ -6,11 +6,9 @@ if (!isset($_SESSION["nombres"]))
     return;
 }
 
-
 $curl = curl_init();
-
 curl_setopt_array($curl, array(
-    CURLOPT_URL => "http://colibri.informaticapp.com/usuarios",
+    CURLOPT_URL => "http://colibri.informaticapp.com/pagos",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
@@ -19,27 +17,24 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_HTTPHEADER => array(
-        $_SESSION["auth"], "Cliente:".$_SESSION["cliente"]
-    ),
-));
+        "Cliente:".$_SESSION["cliente"],
+        $_SESSION["auth"]
+                                ),
+                               ));
+
 
 $response = curl_exec($curl);
 curl_close($curl);
 
 $data = json_decode($response, true);
 
-/*
-if ($data["Estado"] != 200)
-    echo "<script> window.alert('".$mensaje."'); </script>";
-*/
-
 ?>
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+    <h1 class="h3 mb-2 text-gray-800">Pagos de alumnos</h1>
     <div>
-	<a class="btn btn-primary mb-2" href="<?= base_url().'/usuarios/registrar'; ?>"> Registrar </a>
+	<a class="btn btn-primary mb-2" href="<?= base_url().'/pagos/registrar_alumno'; ?>"> Registrar </a>
     </div>
 
     <!-- DataTales Example -->
@@ -51,40 +46,44 @@ if ($data["Estado"] != 200)
 			<tr>
 			    <th>Nombres</th>
 			    <th>Apellidos</th>
+			    <th>Persona</th>
 			    <th>DNI</th>
-			    <th>Edad</th>
-			    <th>Sexo</th>
-			    <th>Foto</th>
+			    <th>Monto</th>
+			    <th>Fecha de pago</th>
+			    <th>Motivo</th>
 			    <th></th>
 			    <th></th>
 			    <th></th>
-
+			    <!-- <th colspan="3" class="text-center">Acciones</th> -->
 			</tr>
                     </thead>
                     <tfoot>
 			<tr>
 			    <th>Nombres</th>
 			    <th>Apellidos</th>
+			    <th>Persona</th>
 			    <th>DNI</th>
-			    <th>Edad</th>
-			    <th>Sexo</th>
-			    <th>Foto</th>
+			    <th>Monto</th>
+			    <th>Fecha de pago</th>
+			    <th>Motivo</th>
 			    <th></th>
 			    <th></th>
 			    <th></th>
+			    <!-- <th colspan="3" class="text-center">Acciones</th> -->
 			</tr>
                     </tfoot>
                     <tbody>
-			<?php foreach ($data["Detalles"] as $usuario): ?>
+			<?php foreach ($data["alumnos"] as $pago): ?>
 			<tr>
-			    <td><?= $usuario["nombres"]; ?></td>
-			    <td><?= $usuario["apellidos"]; ?></td>
-			    <td><?= $usuario["dni"]; ?></td>
-			    <td><?= $usuario["edad"]; ?></td>
-			    <td><?= $usuario["sexo"]; ?></td>
-			    <td class="text-center"><img witdh="80" height="80" src="<?= base_url().$usuario['rutaFoto']; ?>" ></td>
+			    <td><?= $pago["nombres"]; ?></td>
+			    <td><?= $pago["apellidos"]; ?></td>
+			    <td><?php if (is_null($pago['id_alumno'])) { echo "Profesor"; }else { echo "Alumno";}  ?></td>
+			    <td><?= $pago["dni"]; ?></td>
+			    <td><?= $pago["monto"]; ?></td>
+			    <td><?= $pago["fechaPago"]; ?></td>
+			    <td><?= $pago["motivo"]; ?></td>
 			    <td class="text-center">
-				<a href="<?= base_url().'/usuarios/ver/'.$usuario["idUsuario"]; ?>" class="btn btn-info btn-icon-split">
+				<a href="<?= base_url().'/pagos/ver_alumno/'.$pago["idPago"]; ?>" class="btn btn-info btn-icon-split">
 				    <span class="icon text-white-50">
 					<i class="fas fa-info-circle"></i>
 				    </span>
@@ -92,23 +91,21 @@ if ($data["Estado"] != 200)
 				</a>
 			    </td>
 			    <td class="text-center">
-				<a href="<?= base_url().'/usuarios/editar/'.$usuario["idUsuario"]; ?>" class="btn btn-warning btn-icon-split">
+				<a href="<?= base_url().'/pagos/editar_alumno/'.$pago["idPago"]; ?>" class="btn btn-warning btn-icon-split">
 				    <span class="icon text-white-50">
 					<i class="fas fa-exclamation-triangle"></i>
 				    </span>
 				    <span class="text">Editar</span>
 				</a>
 			    </td>
-			    <?php if ($data["Total"] != 1) {?>
 			    <td class="text-center">
-				<a onclick="return alerta()" href="<?= base_url().'/usuarios/eliminar/'.$usuario["idUsuario"]; ?>" class="btn btn-danger btn-icon-split">
+				<a onclick="return alerta()" href="<?= base_url().'/pagos/eliminar_alumno/'.$pago["idPago"]; ?>" class="btn btn-danger btn-icon-split">
 				    <span class="icon text-white-50">
 					<i class="fas fa-trash"></i>
 				    </span>
 				    <span class="text">Eliminar</span>
 				</a>
 			    </td>
-			    <?php } ?>
 			</tr>
 			<?php endforeach; ?>
                     </tbody>
@@ -121,10 +118,11 @@ if ($data["Estado"] != 200)
 <script type="text/javascript">
   function alerta()
   {
-      var r = confirm("Desea eliminar a este usuario?");
+      var r = confirm("Desea eliminar a este pago?");
       if (r)
 	  return true;
       else
 	  return false;
   }
 </script>
+

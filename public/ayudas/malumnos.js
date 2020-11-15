@@ -26,7 +26,8 @@ function secciones()
 {
     let grado = document.getElementById("id_grado");
     let idgrado = grado.options[grado.selectedIndex].value;
+    let cliente = grado.getAttribute("cliente");
 
-    ajax(idgrado, ruta, ponerSecciones);
+    ajax(idgrado, cliente, ruta, ponerSecciones);
 }
 
