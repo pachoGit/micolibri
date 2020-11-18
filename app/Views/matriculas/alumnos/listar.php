@@ -85,7 +85,7 @@ $data = json_decode($response, true);
 				    </a>
 				</td>
 				<td class="text-center">
-				    <a onclick="return alerta()" href="<?= base_url().'/alumnoPorCurso/eliminar/'.$alumno["idAlumno"]; ?>" class="btn btn-danger btn-icon-split">
+				    <a onclick="return alerta()" href="<?= base_url().'/alumnoPorCurso/eliminar/'.$alumno["idAlumnoPorCurso"]; ?>" class="btn btn-danger btn-icon-split">
 					<span class="icon text-white-50">
 					    <i class="fas fa-trash"></i>
 					</span>
