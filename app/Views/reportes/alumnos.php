@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
+?>
+
 <script src="<?= base_url().'/public/ayudas/ajax.js'; ?>"> </script>
 
 <script type="text/javascript">
@@ -70,17 +80,6 @@
 
 </script>
 
-<script src="<?= base_url().'/public/js/html2pdf.bundle.min.js'; ?>"> </script>
-
-<script>
- function generarPDF()
- {
-     const elemento = document.getElementById("pag-pdf");
-
-     html2pdf().set({html2canvas: {scale: 4}}).from(elemento).save();
- }
-</script>
-
 <div class="container-fluid" id="pag-pdf">
 
     <!-- DataTales Example -->
@@ -92,7 +91,7 @@
 
 	    <div class="widget-content" >
 		
-		<form class="needs-validation"  method="post" novalidate>
+		<form class="needs-validation" action="<?= base_url().'/reportes/alumnos'; ?>"  method="post" novalidate>
 		    <div class="form-row">
 			<div class="form-group col-md-3">
 			    <label for="desde">Desde</label>
@@ -132,7 +131,7 @@
 		    </div>
 
 		    <div class="form-group">
-			<input type="button" style="visibility: hidden;" id="boton-pdf" onclick="generarPDF()" class="btn btn-success" value="PDF">
+			<input type="submit" style="visibility: hidden;" id="boton-pdf"  class="btn btn-success" value="PDF">
 		    </div>
 		    
 		    <table class="table table-bordered table-striped" id="tabla">

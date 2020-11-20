@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION["nombres"]))
+{
+    echo "<script>alert('Usted no ha iniciado sesión');window.location.href = '".base_url()."';</script>";
+    return;
+}
+
+?>
+
 <script src="<?= base_url().'/public/ayudas/ajax.js'; ?>"> </script>
 
 <script type="text/javascript">
@@ -83,7 +93,7 @@
 
 	    <div class="widget-content" >
 		
-		<form class="needs-validation" method="post" novalidate>
+		<form class="needs-validation" action="<?= base_url().'/reportes/profesores'; ?>" method="post" novalidate>
 		    <div class="form-row">
 			<div class="form-group col-md-3">
 			    <label for="desde">Desde</label>
@@ -125,7 +135,7 @@
 		    </div>
 
 		    <div class="form-group">
-			<input type="button" style="visibility: hidden;" id="boton-pdf" class="btn btn-success" value="PDF">
+			<input type="submit" style="visibility: hidden;" id="boton-pdf" class="btn btn-success" value="PDF">
 		    </div>
 		    
 		    <table class="table table-bordered table-striped" id="tabla">

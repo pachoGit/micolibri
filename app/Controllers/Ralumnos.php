@@ -8,6 +8,7 @@ class Ralumnos extends Controller
 {
     public function index()
     {
+        helper("pdf");
         $this->vistaSimple("reportes/alumnos");
     }
 
