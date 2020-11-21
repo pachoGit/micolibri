@@ -29,6 +29,7 @@ $RECYCLE.BIN/
 
 # Linux
 *~
+app/Views/login.php
 
 # KDE directory preferences
 .directory
