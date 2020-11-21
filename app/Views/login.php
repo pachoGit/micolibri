@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $_SESSION["auth"] = "Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VMaHJqbVR2b2cyS0hMZ2l4b0s4YjZjcHR0dS8wZFRXOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL3BKUmZVVlhYc1E0MW9TUURnUHUzNDB6VU42TlZSbQ==";
     $_SESSION["cliente"] = 5;
+    $_SESSION["ruta"] = "/var/www/html/micolibri/public/";
 
     $curl = curl_init();
     curl_setopt_array($curl, array(

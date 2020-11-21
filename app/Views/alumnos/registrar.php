@@ -9,8 +9,8 @@ if (!isset($_SESSION["nombres"]))
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $ruta = "/public/alumnos/".$_FILES["rutaFoto"]["name"];
-    //$ruta2 = $_SESSION["ruta"]."alumnos/".$_FILES["rutaFoto"]["name"];
-    $ruta2 = "/var/www/html/micolibri/public/alumnos/".$_FILES["rutaFoto"]["name"];
+    $ruta2 = $_SESSION["ruta"]."alumnos/".$_FILES["rutaFoto"]["name"];
+    //$ruta2 = "/var/www/html/micolibri/public/alumnos/".$_FILES["rutaFoto"]["name"];
     move_uploaded_file($_FILES["rutaFoto"]["tmp_name"], $ruta2);
 
     $curl = curl_init();

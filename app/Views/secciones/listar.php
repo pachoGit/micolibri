@@ -47,7 +47,7 @@ $data = json_decode($response, true);
 			<tr>
 			    <th>Sección</th>
 			    <th>Grado</th>
-			    <th>Fecha Creación</th>
+			    <!-- <th>Fecha Creación</th> -->
 			    <th></th>
 			    <th></th>
 			    <!-- <th colspan="3" class="text-center">Acciones</th> -->
@@ -57,7 +57,7 @@ $data = json_decode($response, true);
 			<tr>
 			    <th>Sección</th>
 			    <th>Grado</th>
-			    <th>Fecha Creación</th>
+			    <!-- <th>Fecha Creación</th> -->
 			    <th></th>
 			    <th></th>
 			    <!-- <th colspan="3" class="text-center">Acciones</th> -->
@@ -68,6 +68,7 @@ $data = json_decode($response, true);
 			<tr>
 			    <td><?= $seccion["seccion"]; ?></td>
 			    <td><?= $seccion["grado"]; ?></td>
+			    <!-- <td><?= $seccion["fechaCreacion"]; ?></td> -->
 			    <td class="text-center">
 				<a href="<?= base_url().'/secciones/editar/'.$seccion["idSeccion"]; ?>" class="btn btn-warning btn-icon-split">
 				    <span class="icon text-white-50">

@@ -85,7 +85,6 @@ class Reportes extends Controller
 
     }
 
-
     public function matriculas()
     {
         session_start();

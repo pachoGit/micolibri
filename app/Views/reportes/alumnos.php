@@ -119,7 +119,7 @@ if (!isset($_SESSION["nombres"]))
 
 			<div class="form-group col-md-3 ml-5 pl-5">
 			    <label for="hasta">Fecha de consulta</label>
-			    <input type="date" class="form-control" value="<?= date("Y-m-d"); ?>" name="hasta" id="hasta"  max="<?= date("Y-m-d"); ?>" readonly>
+			    <input type="date" class="form-control" value="<?= date("Y-m-d"); ?>" name="consulta" id="consulta"  max="<?= date("Y-m-d"); ?>" readonly>
 			    <div class="valid-feedback">
 				Esto est&aacute; bien
 			    </div>
