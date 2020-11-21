@@ -156,6 +156,7 @@ if (!isset($_SESSION["nombres"]))
 			    <tr>
 				<th></th>
 				<th></th>
+				<th></th>
 				<th>Total</th>
 				<th id="total">0</th>
 			    </tr>
