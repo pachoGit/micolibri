@@ -81,7 +81,7 @@ foreach ($modulos as $modulo)
 
 		<?php
 		$iconos = ["fas fa-fw fa-cog", "fas fa-fw fa-wrench", "fas fa-money-bill-alt",
-			   "fas fa-fw fa-table"];
+			   "fas fa-fw fa-table", "fas fa-fw fa-cog"];
 		$contador = 0;
 		foreach ($padres as $padre)
 		{
@@ -104,6 +104,7 @@ foreach ($modulos as $modulo)
 		</li>
 		<?php $contador += 1; } ?>
 
+		<!--
 		<li class="nav-item">
 		    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportes" aria-expanded="true" aria-controls="collapseTwo">
 			<i class="fas fa-fw fa-cog"></i>
@@ -119,7 +120,7 @@ foreach ($modulos as $modulo)
 			</div>
 		    </div>
 		</li>
-
+		-->
 
 
 
